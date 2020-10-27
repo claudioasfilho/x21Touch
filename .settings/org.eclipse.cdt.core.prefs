@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+environment/project/com.silabs.ss.tool.ide.arm.toolchain.iar.debug\#com.silabs.ss.tool.ide.arm.toolchain.iar\:8.50.4.261/PATH/delimiter=\:
+environment/project/com.silabs.ss.tool.ide.arm.toolchain.iar.debug\#com.silabs.ss.tool.ide.arm.toolchain.iar\:8.50.4.261/PATH/operation=prepend
+environment/project/com.silabs.ss.tool.ide.arm.toolchain.iar.debug\#com.silabs.ss.tool.ide.arm.toolchain.iar\:8.50.4.261/PATH/value=/Applications/Simplicity Studio.app/Contents/Eclipse/support/common/build
+environment/project/com.silabs.ss.tool.ide.arm.toolchain.iar.debug\#com.silabs.ss.tool.ide.arm.toolchain.iar\:8.50.4.261/append=true
+environment/project/com.silabs.ss.tool.ide.arm.toolchain.iar.debug\#com.silabs.ss.tool.ide.arm.toolchain.iar\:8.50.4.261/appendContributed=true
+environment/project/com.silabs.ss.tool.ide.arm.toolchain.iar.release\#com.silabs.ss.tool.ide.arm.toolchain.iar\:8.50.4.261/PATH/delimiter=\:
+environment/project/com.silabs.ss.tool.ide.arm.toolchain.iar.release\#com.silabs.ss.tool.ide.arm.toolchain.iar\:8.50.4.261/PATH/operation=prepend
+environment/project/com.silabs.ss.tool.ide.arm.toolchain.iar.release\#com.silabs.ss.tool.ide.arm.toolchain.iar\:8.50.4.261/PATH/value=/Applications/Simplicity Studio.app/Contents/Eclipse/support/common/build
+environment/project/com.silabs.ss.tool.ide.arm.toolchain.iar.release\#com.silabs.ss.tool.ide.arm.toolchain.iar\:8.50.4.261/append=true
+environment/project/com.silabs.ss.tool.ide.arm.toolchain.iar.release\#com.silabs.ss.tool.ide.arm.toolchain.iar\:8.50.4.261/appendContributed=true
