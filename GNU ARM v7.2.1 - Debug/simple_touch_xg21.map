@@ -325,6 +325,8 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./Drivers/src/capsense_xg21.o
  .data          0x0000000000000000        0x0 ./Drivers/src/capsense_xg21.o
  .bss           0x0000000000000000        0x0 ./Drivers/src/capsense_xg21.o
+ .rodata.channelList
+                0x0000000000000000        0x1 ./Drivers/src/capsense_xg21.o
  .text.CAPSENSE_getVal
                 0x0000000000000000       0x24 ./Drivers/src/capsense_xg21.o
  .text.CAPSENSE_getNormalizedVal
@@ -1386,18 +1388,14 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 ./emlib/em_prs.o
  .text.getSource
                 0x0000000000000000       0x4c ./emlib/em_prs.o
- .text.toSyncSource
-                0x0000000000000000       0xe4 ./emlib/em_prs.o
- .text.toSyncSignal
-                0x0000000000000000       0x6c ./emlib/em_prs.o
+ .text.PRS_SourceSignalSet
+                0x0000000000000000       0x38 ./emlib/em_prs.o
  .text.PRS_SourceAsyncSignalSet
                 0x0000000000000000       0x2a ./emlib/em_prs.o
  .text.PRS_GetFreeChannel
                 0x0000000000000000       0x58 ./emlib/em_prs.o
  .text.PRS_Reset
                 0x0000000000000000       0x5c ./emlib/em_prs.o
- .text.PRS_ConnectSignal
-                0x0000000000000000       0x70 ./emlib/em_prs.o
  .text.PRS_ConnectConsumer
                 0x0000000000000000       0x50 ./emlib/em_prs.o
  .text.PRS_PinOutput
@@ -1943,7 +1941,7 @@ END GROUP
 LOAD /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v8-m.main/fpv5-sp/softfp/crtend.o
 LOAD /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v8-m.main/fpv5-sp/softfp/crtn.o
 
-.text           0x0000000000000000     0x12cc
+.text           0x0000000000000000     0x1450
  *(.vectors)
  .vectors       0x0000000000000000      0x134 ./CMSIS/EFR32MG21/startup_efr32mg21.o
                 0x0000000000000000                __Vectors
@@ -2080,10 +2078,10 @@ LOAD /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/g
                 0x0000000000000698       0x4c ./Drivers/src/capsense_xg21.o
                 0x0000000000000698                CAPSENSE_getPressed
  .text.CAPSENSE_Measure
-                0x00000000000006e4       0x64 ./Drivers/src/capsense_xg21.o
+                0x00000000000006e4       0x6c ./Drivers/src/capsense_xg21.o
  .text.CAPSENSE_Sense
-                0x0000000000000748       0x4c ./Drivers/src/capsense_xg21.o
-                0x0000000000000748                CAPSENSE_Sense
+                0x0000000000000750       0x44 ./Drivers/src/capsense_xg21.o
+                0x0000000000000750                CAPSENSE_Sense
  .text.CAPSENSE_Init
                 0x0000000000000794      0x148 ./Drivers/src/capsense_xg21.o
                 0x0000000000000794                CAPSENSE_Init
@@ -2112,58 +2110,62 @@ LOAD /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/g
  .text.GPIO_PinModeSet
                 0x0000000000000b34      0x10c ./emlib/em_gpio.o
                 0x0000000000000b34                GPIO_PinModeSet
- .text.PRS_SourceSignalSet
-                0x0000000000000c40       0x38 ./emlib/em_prs.o
-                0x0000000000000c40                PRS_SourceSignalSet
+ .text.toSyncSource
+                0x0000000000000c40       0xe4 ./emlib/em_prs.o
+ .text.toSyncSignal
+                0x0000000000000d24       0x6c ./emlib/em_prs.o
+ .text.PRS_ConnectSignal
+                0x0000000000000d90       0x70 ./emlib/em_prs.o
+                0x0000000000000d90                PRS_ConnectSignal
  .text.SYSTEM_ChipRevisionGet
-                0x0000000000000c78       0x48 ./emlib/em_system.o
-                0x0000000000000c78                SYSTEM_ChipRevisionGet
+                0x0000000000000e00       0x48 ./emlib/em_system.o
+                0x0000000000000e00                SYSTEM_ChipRevisionGet
  .text.TIMER_Valid
-                0x0000000000000cc0       0x50 ./emlib/em_timer.o
+                0x0000000000000e48       0x50 ./emlib/em_timer.o
  .text.timerPrsConfig
-                0x0000000000000d10       0xa0 ./emlib/em_timer.o
+                0x0000000000000e98       0xa0 ./emlib/em_timer.o
  .text.TIMER_Init
-                0x0000000000000db0      0x100 ./emlib/em_timer.o
-                0x0000000000000db0                TIMER_Init
+                0x0000000000000f38      0x100 ./emlib/em_timer.o
+                0x0000000000000f38                TIMER_Init
  .text.TIMER_InitCC
-                0x0000000000000eb0      0x118 ./emlib/em_timer.o
-                0x0000000000000eb0                TIMER_InitCC
+                0x0000000000001038      0x118 ./emlib/em_timer.o
+                0x0000000000001038                TIMER_InitCC
  .text.TIMER_SyncWait
-                0x0000000000000fc8       0x2e ./emlib/em_timer.o
-                0x0000000000000fc8                TIMER_SyncWait
- *fill*         0x0000000000000ff6        0x2 
+                0x0000000000001150       0x2e ./emlib/em_timer.o
+                0x0000000000001150                TIMER_SyncWait
+ *fill*         0x000000000000117e        0x2 
  .text.__NVIC_SetPriority
-                0x0000000000000ff8       0x54 ./src/main.o
+                0x0000000000001180       0x54 ./src/main.o
  .text.SysTick_Config
-                0x000000000000104c       0x44 ./src/main.o
+                0x00000000000011d4       0x44 ./src/main.o
  .text.SystemCoreClockGet
-                0x0000000000001090        0xe ./src/main.o
- *fill*         0x000000000000109e        0x2 
+                0x0000000000001218        0xe ./src/main.o
+ *fill*         0x0000000000001226        0x2 
  .text.CHIP_Init
-                0x00000000000010a0       0xa8 ./src/main.o
+                0x0000000000001228       0xa8 ./src/main.o
  .text.SysTick_Handler
-                0x0000000000001148       0x1c ./src/main.o
-                0x0000000000001148                SysTick_Handler
- .text.Delay    0x0000000000001164       0x30 ./src/main.o
- .text.main     0x0000000000001194       0x70 ./src/main.o
-                0x0000000000001194                main
- .text.exit     0x0000000000001204       0x28 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/fpv5-sp/softfp/libc_nano.a(lib_a-exit.o)
-                0x0000000000001204                exit
+                0x00000000000012d0       0x1c ./src/main.o
+                0x00000000000012d0                SysTick_Handler
+ .text.Delay    0x00000000000012ec       0x30 ./src/main.o
+ .text.main     0x000000000000131c       0x70 ./src/main.o
+                0x000000000000131c                main
+ .text.exit     0x000000000000138c       0x28 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/fpv5-sp/softfp/libc_nano.a(lib_a-exit.o)
+                0x000000000000138c                exit
  .text.__libc_init_array
-                0x000000000000122c       0x48 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/fpv5-sp/softfp/libc_nano.a(lib_a-init.o)
-                0x000000000000122c                __libc_init_array
- .text.memset   0x0000000000001274       0x10 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/fpv5-sp/softfp/libc_nano.a(lib_a-memset.o)
-                0x0000000000001274                memset
- .text._exit    0x0000000000001284        0x4 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/fpv5-sp/softfp/libnosys.a(_exit.o)
-                0x0000000000001284                _exit
+                0x00000000000013b4       0x48 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/fpv5-sp/softfp/libc_nano.a(lib_a-init.o)
+                0x00000000000013b4                __libc_init_array
+ .text.memset   0x00000000000013fc       0x10 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/fpv5-sp/softfp/libc_nano.a(lib_a-memset.o)
+                0x00000000000013fc                memset
+ .text._exit    0x000000000000140c        0x4 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/fpv5-sp/softfp/libnosys.a(_exit.o)
+                0x000000000000140c                _exit
  *(.init)
- .init          0x0000000000001288        0x4 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v8-m.main/fpv5-sp/softfp/crti.o
-                0x0000000000001288                _init
- .init          0x000000000000128c        0x8 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v8-m.main/fpv5-sp/softfp/crtn.o
+ .init          0x0000000000001410        0x4 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v8-m.main/fpv5-sp/softfp/crti.o
+                0x0000000000001410                _init
+ .init          0x0000000000001414        0x8 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v8-m.main/fpv5-sp/softfp/crtn.o
  *(.fini)
- .fini          0x0000000000001294        0x4 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v8-m.main/fpv5-sp/softfp/crti.o
-                0x0000000000001294                _fini
- .fini          0x0000000000001298        0x8 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v8-m.main/fpv5-sp/softfp/crtn.o
+ .fini          0x000000000000141c        0x4 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v8-m.main/fpv5-sp/softfp/crti.o
+                0x000000000000141c                _fini
+ .fini          0x0000000000001420        0x8 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v8-m.main/fpv5-sp/softfp/crtn.o
  *crtbegin.o(.ctors)
  *crtbegin?.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
@@ -2176,47 +2178,44 @@ LOAD /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/g
  *(.dtors)
  *(.rodata*)
  .rodata.ledArray
-                0x00000000000012a0       0x10 ./BSP/bsp_stk_leds.o
- .rodata.channelList
-                0x00000000000012b0        0x2 ./Drivers/src/capsense_xg21.o
- *fill*         0x00000000000012b2        0x2 
- .rodata        0x00000000000012b4       0x10 ./Drivers/src/capsense_xg21.o
+                0x0000000000001428       0x10 ./BSP/bsp_stk_leds.o
+ .rodata        0x0000000000001438       0x10 ./Drivers/src/capsense_xg21.o
  .rodata._global_impure_ptr
-                0x00000000000012c4        0x4 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/fpv5-sp/softfp/libc_nano.a(lib_a-impure.o)
-                0x00000000000012c4                _global_impure_ptr
+                0x0000000000001448        0x4 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/fpv5-sp/softfp/libc_nano.a(lib_a-impure.o)
+                0x0000000000001448                _global_impure_ptr
  *(.eh_frame*)
- .eh_frame      0x00000000000012c8        0x0 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v8-m.main/fpv5-sp/softfp/crtbegin.o
- .eh_frame      0x00000000000012c8        0x4 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v8-m.main/fpv5-sp/softfp/crtend.o
+ .eh_frame      0x000000000000144c        0x0 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v8-m.main/fpv5-sp/softfp/crtbegin.o
+ .eh_frame      0x000000000000144c        0x4 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v8-m.main/fpv5-sp/softfp/crtend.o
 
-.glue_7         0x00000000000012cc        0x0
- .glue_7        0x00000000000012cc        0x0 linker stubs
+.glue_7         0x0000000000001450        0x0
+ .glue_7        0x0000000000001450        0x0 linker stubs
 
-.glue_7t        0x00000000000012cc        0x0
- .glue_7t       0x00000000000012cc        0x0 linker stubs
+.glue_7t        0x0000000000001450        0x0
+ .glue_7t       0x0000000000001450        0x0 linker stubs
 
-.vfp11_veneer   0x00000000000012cc        0x0
- .vfp11_veneer  0x00000000000012cc        0x0 linker stubs
+.vfp11_veneer   0x0000000000001450        0x0
+ .vfp11_veneer  0x0000000000001450        0x0 linker stubs
 
-.v4_bx          0x00000000000012cc        0x0
- .v4_bx         0x00000000000012cc        0x0 linker stubs
+.v4_bx          0x0000000000001450        0x0
+ .v4_bx         0x0000000000001450        0x0 linker stubs
 
-.iplt           0x00000000000012cc        0x0
- .iplt          0x00000000000012cc        0x0 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v8-m.main/fpv5-sp/softfp/crtbegin.o
+.iplt           0x0000000000001450        0x0
+ .iplt          0x0000000000001450        0x0 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v8-m.main/fpv5-sp/softfp/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00000000000012cc                __exidx_start = .
+                0x0000000000001450                __exidx_start = .
 
-.ARM.exidx      0x00000000000012cc        0x8
+.ARM.exidx      0x0000000000001450        0x8
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
- .ARM.exidx     0x00000000000012cc        0x8 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/fpv5-sp/softfp/crt0.o
-                0x00000000000012d4                __exidx_end = .
-                0x00000000000012d4                __etext = .
+ .ARM.exidx     0x0000000000001450        0x8 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v8-m.main/fpv5-sp/softfp/crt0.o
+                0x0000000000001458                __exidx_end = .
+                0x0000000000001458                __etext = .
 
-.rel.dyn        0x00000000000012d4        0x0
- .rel.iplt      0x00000000000012d4        0x0 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v8-m.main/fpv5-sp/softfp/crtbegin.o
+.rel.dyn        0x0000000000001458        0x0
+ .rel.iplt      0x0000000000001458        0x0 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v8-m.main/fpv5-sp/softfp/crtbegin.o
 
-.data           0x0000000020000000       0x74 load address 0x00000000000012d4
+.data           0x0000000020000000       0x74 load address 0x0000000000001458
                 0x0000000020000000                __data_start__ = .
  *(vtable)
  *(.data*)
@@ -2251,10 +2250,10 @@ LOAD /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/g
                 0x0000000020000074                . = ALIGN (0x4)
                 0x0000000020000074                __data_end__ = .
 
-.igot.plt       0x0000000020000074        0x0 load address 0x0000000000001348
+.igot.plt       0x0000000020000074        0x0 load address 0x00000000000014cc
  .igot.plt      0x0000000020000074        0x0 /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/gnu_arm/7.2_2017q4/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v8-m.main/fpv5-sp/softfp/crtbegin.o
 
-.bss            0x0000000020000074       0x34 load address 0x0000000000001348
+.bss            0x0000000020000074       0x2c load address 0x00000000000014cc
                 0x0000000020000074                . = ALIGN (0x4)
                 0x0000000020000074                __bss_start__ = .
  *(.bss*)
@@ -2265,26 +2264,26 @@ LOAD /Applications/Simplicity Studio.app/Contents/Eclipse/developer/toolchains/g
                 0x0000000020000091        0x1 ./Drivers/src/capsense_xg21.o
  *fill*         0x0000000020000092        0x2 
  .bss.channelValues
-                0x0000000020000094        0x8 ./Drivers/src/capsense_xg21.o
+                0x0000000020000094        0x4 ./Drivers/src/capsense_xg21.o
  .bss.channelMaxValues
-                0x000000002000009c        0x8 ./Drivers/src/capsense_xg21.o
- .bss.msTicks   0x00000000200000a4        0x4 ./src/main.o
+                0x0000000020000098        0x4 ./Drivers/src/capsense_xg21.o
+ .bss.msTicks   0x000000002000009c        0x4 ./src/main.o
  *(COMMON)
-                0x00000000200000a8                . = ALIGN (0x4)
-                0x00000000200000a8                __bss_end__ = .
+                0x00000000200000a0                . = ALIGN (0x4)
+                0x00000000200000a0                __bss_end__ = .
 
-.heap           0x00000000200000a8      0xc00
-                0x00000000200000a8                __HeapBase = .
-                0x00000000200000a8                __end__ = .
-                0x00000000200000a8                end = __end__
-                0x00000000200000a8                _end = __end__
+.heap           0x00000000200000a0      0xc00
+                0x00000000200000a0                __HeapBase = .
+                0x00000000200000a0                __end__ = .
+                0x00000000200000a0                end = __end__
+                0x00000000200000a0                _end = __end__
  *(.heap*)
- .heap          0x00000000200000a8      0xc00 ./CMSIS/EFR32MG21/startup_efr32mg21.o
-                0x0000000020000ca8                __HeapLimit = .
+ .heap          0x00000000200000a0      0xc00 ./CMSIS/EFR32MG21/startup_efr32mg21.o
+                0x0000000020000ca0                __HeapLimit = .
 
-.stack_dummy    0x00000000200000a8      0x400
+.stack_dummy    0x00000000200000a0      0x400
  *(.stack*)
- .stack         0x00000000200000a8      0x400 ./CMSIS/EFR32MG21/startup_efr32mg21.o
+ .stack         0x00000000200000a0      0x400 ./CMSIS/EFR32MG21/startup_efr32mg21.o
                 0x0000000020018000                __StackTop = (ORIGIN (RAM) + LENGTH (RAM))
                 0x0000000020017c00                __StackLimit = (__StackTop - SIZEOF (.stack_dummy))
                 0x0000000020018000                PROVIDE (__stack, __StackTop)
@@ -2347,17 +2346,17 @@ OUTPUT(simple_touch_xg21.axf elf32-littlearm)
  .comment       0x000000000000007e       0x7f ./emlib/em_timer.o
  .comment       0x000000000000007e       0x7f ./src/main.o
 
-.debug_info     0x0000000000000000     0xf24e
+.debug_info     0x0000000000000000     0xf3ec
  .debug_info    0x0000000000000000     0x12ed ./BSP/bsp_stk_leds.o
  .debug_info    0x00000000000012ed       0x26 ./CMSIS/EFR32MG21/startup_efr32mg21.o
  .debug_info    0x0000000000001313     0x1361 ./CMSIS/EFR32MG21/system_efr32mg21.o
- .debug_info    0x0000000000002674     0x282f ./Drivers/src/capsense_xg21.o
- .debug_info    0x0000000000004ea3     0x184c ./emlib/em_acmp.o
- .debug_info    0x00000000000066ef     0x198b ./emlib/em_gpio.o
- .debug_info    0x000000000000807a     0x2bc3 ./emlib/em_prs.o
- .debug_info    0x000000000000ac3d      0x815 ./emlib/em_system.o
- .debug_info    0x000000000000b452     0x2580 ./emlib/em_timer.o
- .debug_info    0x000000000000d9d2     0x187c ./src/main.o
+ .debug_info    0x0000000000002674     0x29cd ./Drivers/src/capsense_xg21.o
+ .debug_info    0x0000000000005041     0x184c ./emlib/em_acmp.o
+ .debug_info    0x000000000000688d     0x198b ./emlib/em_gpio.o
+ .debug_info    0x0000000000008218     0x2bc3 ./emlib/em_prs.o
+ .debug_info    0x000000000000addb      0x815 ./emlib/em_system.o
+ .debug_info    0x000000000000b5f0     0x2580 ./emlib/em_timer.o
+ .debug_info    0x000000000000db70     0x187c ./src/main.o
 
 .debug_abbrev   0x0000000000000000     0x143a
  .debug_abbrev  0x0000000000000000      0x1fa ./BSP/bsp_stk_leds.o
@@ -2502,17 +2501,17 @@ OUTPUT(simple_touch_xg21.axf elf32-littlearm)
  .debug_macro   0x000000000002f671       0x79 ./emlib/em_timer.o
  .debug_macro   0x000000000002f6ea      0x32d ./src/main.o
 
-.debug_line     0x0000000000000000     0x6273
+.debug_line     0x0000000000000000     0x6272
  .debug_line    0x0000000000000000      0xbea ./BSP/bsp_stk_leds.o
  .debug_line    0x0000000000000bea       0xe9 ./CMSIS/EFR32MG21/startup_efr32mg21.o
  .debug_line    0x0000000000000cd3      0x99d ./CMSIS/EFR32MG21/system_efr32mg21.o
- .debug_line    0x0000000000001670      0xba7 ./Drivers/src/capsense_xg21.o
- .debug_line    0x0000000000002217      0xace ./emlib/em_acmp.o
- .debug_line    0x0000000000002ce5      0xa8d ./emlib/em_gpio.o
- .debug_line    0x0000000000003772      0xa47 ./emlib/em_prs.o
- .debug_line    0x00000000000041b9      0x917 ./emlib/em_system.o
- .debug_line    0x0000000000004ad0      0xc4c ./emlib/em_timer.o
- .debug_line    0x000000000000571c      0xb57 ./src/main.o
+ .debug_line    0x0000000000001670      0xba6 ./Drivers/src/capsense_xg21.o
+ .debug_line    0x0000000000002216      0xace ./emlib/em_acmp.o
+ .debug_line    0x0000000000002ce4      0xa8d ./emlib/em_gpio.o
+ .debug_line    0x0000000000003771      0xa47 ./emlib/em_prs.o
+ .debug_line    0x00000000000041b8      0x917 ./emlib/em_system.o
+ .debug_line    0x0000000000004acf      0xc4c ./emlib/em_timer.o
+ .debug_line    0x000000000000571b      0xb57 ./src/main.o
 
 .debug_str      0x0000000000000000   0x141825
  .debug_str     0x0000000000000000   0x13b952 ./BSP/bsp_stk_leds.o
@@ -2521,13 +2520,13 @@ OUTPUT(simple_touch_xg21.axf elf32-littlearm)
                                          0xfd (size before relaxing)
  .debug_str     0x000000000013b9ff      0x97f ./CMSIS/EFR32MG21/system_efr32mg21.o
                                      0x139e1a (size before relaxing)
- .debug_str     0x000000000013c37e     0x1e4c ./Drivers/src/capsense_xg21.o
-                                     0x13ce88 (size before relaxing)
- .debug_str     0x000000000013e1ca      0x27f ./emlib/em_acmp.o
+ .debug_str     0x000000000013c37e     0x22cd ./Drivers/src/capsense_xg21.o
+                                     0x13d309 (size before relaxing)
+ .debug_str     0x000000000013e64b      0x27f ./emlib/em_acmp.o
                                      0x13ae74 (size before relaxing)
- .debug_str     0x000000000013e449      0x3c8 ./emlib/em_gpio.o
+ .debug_str     0x000000000013e8ca      0x3c8 ./emlib/em_gpio.o
                                      0x13a9f9 (size before relaxing)
- .debug_str     0x000000000013e811     0x2720 ./emlib/em_prs.o
+ .debug_str     0x000000000013ec92     0x229f ./emlib/em_prs.o
                                      0x13cf72 (size before relaxing)
  .debug_str     0x0000000000140f31      0x3ef ./emlib/em_system.o
                                      0x139b67 (size before relaxing)

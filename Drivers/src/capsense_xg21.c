@@ -262,14 +262,18 @@ static void CAPSENSE_Measure(ACMP_Channel_TypeDef channel)
 
   measurementComplete = false;
 
+  TIMER_IntClear(TIMER0, TIMER_IEN_OF);
+
   // Start timers
   TIMER_Enable(TIMER0, true);
   TIMER_Enable(TIMER1, true);
 
   // Wait for measurement to complete
   while ( measurementComplete == false );
-    //EMU_EnterEM1();
-	  //measurementComplete = measurementComplete;
+    {
+	  //EMU_EnterEM1();
+    }
+
 }
 
 /**************************************************************************//**
@@ -315,72 +319,79 @@ void CAPSENSE_Sense(void)
  *****************************************************************************/
 void CAPSENSE_Init(void)
 {
-  // Use the default STK capacative sensing setup
-  ACMP_CapsenseInit_TypeDef capsenseInit = ACMP_CAPSENSE_INIT_DEFAULT;
+	// Use the default STK capacative sensing setup
+	ACMP_CapsenseInit_TypeDef capsenseInit = ACMP_CAPSENSE_INIT_DEFAULT;
 
 
-  /* Enable TIMER0, TIMER1, ACMP_CAPSENSE and PRS clock */
-  CMU_ClockEnable(cmuClock_ACMP0, true);
-  CMU_ClockEnable(cmuClock_TIMER0, true);
-  CMU_ClockEnable(cmuClock_TIMER1, true);
+	/* Enable TIMER0, TIMER1, ACMP_CAPSENSE and PRS clock */
+	CMU_ClockEnable(cmuClock_ACMP0, true);
+	CMU_ClockEnable(cmuClock_TIMER0, true);
+	CMU_ClockEnable(cmuClock_TIMER1, true);
 
-  CMU_ClockEnable(cmuClock_PRS, true);
+	CMU_ClockEnable(cmuClock_PRS, true);
 
-  CMU_ClockEnable(cmuClock_GPIO, true);
-  //CMU_ClockEnable(cmuClock_TIMER0, true);
-
-  // Initialize TIMER0 but do not run yet
-  TIMER_Init_TypeDef timer0_init = TIMER_INIT_DEFAULT;
-  timer0_init.prescale = timerPrescale512;
-  timer0_init.enable = false;
-  TIMER_Init(TIMER0, &timer0_init);
-
-  // Set TIMER0 top value to 10 and in
-  TIMER_TopSet(TIMER0, 10);
-
-  // Enable TIMER0 overflow interrupt
-  TIMER_IntEnable(TIMER0, TIMER_IEN_OF);
-
-  // Initialize TIMER1 but do not run yet
-  TIMER_Init_TypeDef timer1_init = TIMER_INIT_DEFAULT;
-  timer1_init.prescale = timerPrescale1024;
-  timer1_init.clkSel = timerClkSelCC1;
-  timer1_init.enable = false;
-  TIMER_Init(TIMER0, &timer1_init);
-
-  // Set TIMER1 top value to 0xFFFF
-  TIMER_TopSet(0, 0xFFFF);
-
-  // Set up TIMER1 CC1 to capture on PRS channel 0 input
-  TIMER_InitCC_TypeDef cc1_init = TIMER_INITCC_DEFAULT;
-  cc1_init.edge         = timerEdgeBoth;
-  cc1_init.mode         = timerCCModeCapture;
-  cc1_init.eventCtrl    = timerEventRising;
-  cc1_init.prsInput     = true;
-  cc1_init.prsInputType = timerPrsInputSync;
-  cc1_init.prsSel       = 0;
-  TIMER_InitCC(TIMER1, 1, &cc1_init);
+	CMU_ClockEnable(cmuClock_GPIO, true);
 
 
-  PRS_SourceSignalSet(0,PRS_ASYNC_CH_CTRL_SOURCESEL_ACMP0,PRS_ASYNC_CH_CTRL_SIGSEL_ACMP0OUT,prsEdgePos);
+	// Initialize TIMER0 but do not run yet
+	TIMER_Init_TypeDef timer0_init = TIMER_INIT_DEFAULT;
+	timer0_init.prescale = timerPrescale512;
+	timer0_init.enable = false;
+	TIMER_Init(TIMER0, &timer0_init);
 
-  // Route the ACMP output using synchronous PRS channel 0
-  // PRS_ConnectSignal(0, prsTypeSync, prsSignalACMP0_OUT);
+	// Set TIMER0 top value to 10 and in
+	TIMER_TopSet(TIMER0, 10);
+
+	// Enable TIMER0 overflow interrupt
+	TIMER_IntEnable(TIMER0, TIMER_IEN_OF);
+
+	// Initialize TIMER1 but do not run yet
+	TIMER_Init_TypeDef timer1_init = TIMER_INIT_DEFAULT;
+	timer1_init.prescale = timerPrescale1024;
+	timer1_init.clkSel = timerClkSelCC1;
+	timer1_init.enable = false;
+	TIMER_Init(TIMER0, &timer1_init);
+
+	// Set TIMER1 top value to 0xFFFF
+	TIMER_TopSet(0, 0xFFFF);
+
+	// Set up TIMER1 CC1 to capture on PRS channel 0 input
+	TIMER_InitCC_TypeDef cc1_init = TIMER_INITCC_DEFAULT;
+	cc1_init.edge         = timerEdgeBoth;
+	cc1_init.mode         = timerCCModeCapture;
+	cc1_init.eventCtrl    = timerEventRising;
+	cc1_init.prsInput     = true;
+	cc1_init.prsInputType = timerPrsInputSync;
+	cc1_init.prsSel       = 0;
+	TIMER_InitCC(TIMER1, 1, &cc1_init);
 
 
-   // Set up ACMP1 in capsense mode
-    ACMP_CapsenseInit(ACMP0, &capsenseInit);
+	//PRS_SourceSignalSet(0,PRS_ASYNC_CH_CTRL_SOURCESEL_ACMP0,PRS_ASYNC_CH_CTRL_SIGSEL_ACMP0OUT,prsEdgePos);
 
-    // Route the ACMP out to a pin for debugging purposes
-     GPIO_PinModeSet(DEBUG_ACMP0OUT_PORT, DEBUG_ACMP0OUT_PIN, gpioModePushPull, 0);
-     GPIO->ACMPROUTE[0].ACMPOUTROUTE = (DEBUG_ACMP0OUT_PORT << _GPIO_ACMP_ACMPOUTROUTE_PORT_SHIFT) | (DEBUG_ACMP0OUT_PIN << _GPIO_ACMP_ACMPOUTROUTE_PIN_SHIFT);
-     GPIO->ACMPROUTE[0].ROUTEEN = 1;
+	// Route the ACMP output using synchronous PRS channel 0
+	PRS_ConnectSignal(0, prsTypeSync, prsSignalACMP0_OUT);
 
-  TIMER_Enable(TIMER0, true);
-  TIMER_Enable(TIMER1, true);
 
-  // Enable TIMER0 interrupt
-  NVIC_EnableIRQ(TIMER0_IRQn);
+	// Set up ACMP1 in capsense mode
+	ACMP_CapsenseInit(ACMP0, &capsenseInit);
+
+	// Route the ACMP out to a pin for debugging purposes
+
+
+	//PC3 - EXP Header 10
+
+	// Assign the port C/D even pin analog inputs to CD ABUS 0
+	GPIO->CDBUSALLOC |= GPIO_CDBUSALLOC_CDODD0_ACMP0;
+	//GPIO->CDBUSALLOC |= GPIO_CDBUSALLOC_CDEVEN0_ACMP0;
+	GPIO_PinModeSet(DEBUG_ACMP0OUT_PORT, DEBUG_ACMP0OUT_PIN, gpioModePushPull, 0);
+	GPIO->ACMPROUTE[0].ACMPOUTROUTE = (DEBUG_ACMP0OUT_PORT << _GPIO_ACMP_ACMPOUTROUTE_PORT_SHIFT) | (DEBUG_ACMP0OUT_PIN << _GPIO_ACMP_ACMPOUTROUTE_PIN_SHIFT);
+	GPIO->ACMPROUTE[0].ROUTEEN = 1;
+
+	//TIMER_Enable(TIMER0, true);
+	//TIMER_Enable(TIMER1, true);
+
+	// Enable TIMER0 interrupt
+	NVIC_EnableIRQ(TIMER0_IRQn);
 }
 
 /** @} (end group CapSense) */

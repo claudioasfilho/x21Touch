@@ -48,7 +48,7 @@ extern "C" {
 #define CAPSENSE_CHANNELS       { acmpInputPC1, acmpInputPC2 }
 #define BUTTON0_CHANNEL         0             /**< Button 0 channel */
 #define BUTTON1_CHANNEL         1             /**< Button 1 channel */
-#define ACMP_CHANNELS           2             /**< Number of channels in use for capsense */
+#define ACMP_CHANNELS           1             /**< Number of channels in use for capsense */
 #define NUM_SLIDER_CHANNELS     0             /**< The kit does not have a slider */
 
 #define DEBUG_ACMP0OUT_PORT     gpioPortC
