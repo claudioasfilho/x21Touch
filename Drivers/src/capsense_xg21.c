@@ -323,14 +323,16 @@ void CAPSENSE_Init(void)
 	ACMP_CapsenseInit_TypeDef capsenseInit = ACMP_CAPSENSE_INIT_DEFAULT;
 
 
-	/* Enable TIMER0, TIMER1, ACMP_CAPSENSE and PRS clock */
+	/* Enable GPIO, TIMER0, TIMER1, ACMP_CAPSENSE and PRS clock */
+	CMU_ClockEnable(cmuClock_EM01GRPACLK, true);
+	CMU_ClockEnable(cmuClock_GPIO, true);
 	CMU_ClockEnable(cmuClock_ACMP0, true);
 	CMU_ClockEnable(cmuClock_TIMER0, true);
 	CMU_ClockEnable(cmuClock_TIMER1, true);
 
 	CMU_ClockEnable(cmuClock_PRS, true);
 
-	CMU_ClockEnable(cmuClock_GPIO, true);
+
 
 
 	// Initialize TIMER0 but do not run yet
